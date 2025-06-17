@@ -4,7 +4,7 @@ public class EmptyCell implements Cell {
 
     private static final String EMPTY_SIGN = "■";
 
-    private final CellState cellState =CellState.initialize();
+    private final CellState cellState = CellState.initialize();
 
     @Override
     public boolean isLandMine() {
@@ -19,10 +19,10 @@ public class EmptyCell implements Cell {
 
     @Override
     public CellSnapshot getSnapshot() {
-        if (cellState.isOpened()){
+        if (cellState.isOpened()) {
             return CellSnapshot.ofEmpty();
         }
-        if (cellState.isFlagged()){
+        if (cellState.isFlagged()) {
             return CellSnapshot.ofFlag();
         }
         return CellSnapshot.ofUnchecked();

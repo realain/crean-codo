@@ -3,7 +3,7 @@ package cleancode.minesweeper.tobe.minesweeper.io.sign;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapShotStatus;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshot;
 
-public class UncheckedCellSignProvider implements CellSignProvidable{
+public class UncheckedCellSignProvider implements CellSignProvidable {
 
     private static final String UNCHECKED_SIGN = "□";
 

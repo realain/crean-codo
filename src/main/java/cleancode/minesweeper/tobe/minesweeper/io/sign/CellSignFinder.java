@@ -14,7 +14,7 @@ public class CellSignFinder {
             new UncheckedCellSignProvider()
     );
 
-    public String findCellSignFrom(CellSnapshot snapshot){
+    public String findCellSignFrom(CellSnapshot snapshot) {
 
         return CELL_SIGN_PROVIDERS.stream()
                 .filter(provider -> provider.supports(snapshot))

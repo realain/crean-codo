@@ -1,11 +1,13 @@
 package cleancode.minesweeper.tobe.minesweeper.board;
 
 import cleancode.minesweeper.tobe.minesweeper.board.cell.*;
-import cleancode.minesweeper.tobe.minesweeper.gamelevel.GameLevel;
 import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
 import cleancode.minesweeper.tobe.minesweeper.board.position.CellPositions;
 import cleancode.minesweeper.tobe.minesweeper.board.position.RelativePosition;
+import cleancode.minesweeper.tobe.minesweeper.gamelevel.GameLevel;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import java.util.Stack;
 
@@ -101,21 +103,21 @@ public class GameBoard {
 
     private void initializeEmptyCells(CellPositions cellPositions) {
         List<CellPosition> allPositions = cellPositions.getPositions();
-        for(CellPosition position : allPositions) {
+        for (CellPosition position : allPositions) {
             updateCellAt(position, new EmptyCell());
         }
     }
 
     private void initializeLandMineCells(List<CellPosition> landMinePositions) {
-        for(CellPosition position : landMinePositions) {
+        for (CellPosition position : landMinePositions) {
             updateCellAt(position, new LandMineCell());
         }
     }
 
     private void initializeNumberCells(List<CellPosition> numberPositionCandidates) {
-        for(CellPosition candidatePostiton : numberPositionCandidates) {
+        for (CellPosition candidatePostiton : numberPositionCandidates) {
             int count = countNearbyLandMines(candidatePostiton);
-            if(count != 0){
+            if (count != 0) {
                 updateCellAt(candidatePostiton, new NumberCell(count));
             }
         }
@@ -170,17 +172,17 @@ public class GameBoard {
     }
 
     private void openSurrounedCells2(CellPosition cellPosition) {
-        Stack<CellPosition> stack = new Stack<>();
+        Deque<CellPosition> deque = new ArrayDeque<>();
 
-        stack.push(cellPosition);
+        deque.push(cellPosition);
 
-        while(!stack.isEmpty()) {
-            openAndPushCellAt(stack);
+        while (!deque.isEmpty()) {
+            openAndPushCellAt(deque);
         }
     }
 
-    private void openAndPushCellAt(Stack<CellPosition> stack) {
-        CellPosition currentCellPosition = stack.pop();
+    private void openAndPushCellAt(Deque<CellPosition> deque) {
+        CellPosition currentCellPosition = deque.pop();
         if (isOpenedCell(currentCellPosition)) {
             return;
         }
@@ -195,8 +197,8 @@ public class GameBoard {
         }
 
         List<CellPosition> surroundedPositions = calculateSurroundedPositions(currentCellPosition, getRowSize(), getColSize());
-        for(CellPosition surroundedPosition : surroundedPositions) {
-            stack.push(surroundedPosition);
+        for (CellPosition surroundedPosition : surroundedPositions) {
+            deque.push(surroundedPosition);
         }
     }
 
